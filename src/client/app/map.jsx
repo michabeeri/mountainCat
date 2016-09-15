@@ -4,7 +4,12 @@ class Map extends React.Component {
     render() {
         return (
             <div className="map">
-                <img src="resources/demoMap.webp" width="320" height="480"/>
+                <div className="mapContainer">
+                    <img src="resources/demoMap.webp"/>
+                </div>
+                <div className="bannerContainer animate">
+                    <h3 className="mapName">laughing steppes</h3>
+                </div>
             </div>
         );
     }

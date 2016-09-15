@@ -22020,7 +22020,20 @@
 	            return _react2.default.createElement(
 	                "div",
 	                { className: "map" },
-	                _react2.default.createElement("img", { src: "resources/demoMap.webp", width: "320", height: "480" })
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "mapContainer" },
+	                    _react2.default.createElement("img", { src: "resources/demoMap.webp" })
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "bannerContainer animate" },
+	                    _react2.default.createElement(
+	                        "h3",
+	                        { className: "mapName" },
+	                        "laughing steppes"
+	                    )
+	                )
 	            );
 	        }
 	    }]);
