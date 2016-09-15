@@ -57,9 +57,9 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 34);
 	
-	var _AwesomeComponent = __webpack_require__(/*! ./AwesomeComponent.jsx */ 172);
+	var _map = __webpack_require__(/*! ./map.jsx */ 172);
 	
-	var _AwesomeComponent2 = _interopRequireDefault(_AwesomeComponent);
+	var _map2 = _interopRequireDefault(_map);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -84,12 +84,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    ' Hello React!'
-	                ),
-	                _react2.default.createElement(_AwesomeComponent2.default, null)
+	                _react2.default.createElement(_map2.default, null)
 	            );
 	        }
 	    }]);
@@ -21985,12 +21980,12 @@
 
 /***/ },
 /* 172 */
-/*!*********************************************!*\
-  !*** ./src/client/app/AwesomeComponent.jsx ***!
-  \*********************************************/
+/*!********************************!*\
+  !*** ./src/client/app/map.jsx ***!
+  \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -22010,54 +22005,30 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var AwesomeComponent = function (_React$Component) {
-	    _inherits(AwesomeComponent, _React$Component);
+	var Map = function (_React$Component) {
+	    _inherits(Map, _React$Component);
 	
-	    function AwesomeComponent(props) {
-	        _classCallCheck(this, AwesomeComponent);
+	    function Map() {
+	        _classCallCheck(this, Map);
 	
-	        var _this = _possibleConstructorReturn(this, (AwesomeComponent.__proto__ || Object.getPrototypeOf(AwesomeComponent)).call(this, props));
-	
-	        _this.state = { likesCount: 0 };
-	        _this.onLike = _this.onLike.bind(_this);
-	        return _this;
+	        return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).apply(this, arguments));
 	    }
 	
-	    _createClass(AwesomeComponent, [{
-	        key: 'onLike',
-	        value: function onLike() {
-	            var newLikesCount = this.state.likesCount + 1;
-	            this.setState({ likesCount: newLikesCount });
-	        }
-	    }, {
-	        key: 'render',
+	    _createClass(Map, [{
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Likes : ',
-	                _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    this.state.likesCount
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'button',
-	                        { onClick: this.onLike },
-	                        'Like Me'
-	                    )
-	                )
+	                "div",
+	                { className: "map" },
+	                _react2.default.createElement("img", { src: "resources/demoMap.webp", width: "320", height: "480" })
 	            );
 	        }
 	    }]);
 	
-	    return AwesomeComponent;
+	    return Map;
 	}(_react2.default.Component);
 	
-	exports.default = AwesomeComponent;
+	exports.default = Map;
 
 /***/ }
 /******/ ]);
