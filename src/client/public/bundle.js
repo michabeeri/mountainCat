@@ -69,6 +69,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// import PixiEngine from './pixiEngine.jsx';
+	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
 	
@@ -22015,9 +22017,13 @@
 	
 	var location = {
 	    coordinates: {
-	        x: 30,
-	        y: 30
+	        x: 50,
+	        y: 50
 	    }
+	};
+	
+	var conditional = function conditional(condition, jsx) {
+	    return condition && jsx;
 	};
 	
 	var Map = function (_React$Component) {
@@ -22046,17 +22052,13 @@
 	        key: 'render',
 	        value: function render() {
 	            var currentLocation = this.state.location;
-	            // const locationContainerStyle = currentLocation ? {
-	            //     left: _.get(currentLocation, 'coordinates.x', 0) + '%',
-	            //     top: _.get(currentLocation, 'coordinates.y', 0) + '%'
-	            // }: {}
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'map', onClick: this.onClick },
 	                _react2.default.createElement(
 	                    'div',
 	                    { id: 'mapContainer', className: currentLocation ? "unfocus" : "" },
-	                    _react2.default.createElement('img', { src: 'resources/demoMap.webp' })
+	                    _react2.default.createElement('img', { src: 'resources/demoMapTransperent.webp' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -22067,7 +22069,7 @@
 	                        'laughing steppes'
 	                    )
 	                ),
-	                _react2.default.createElement(_mapLocationDetails2.default, { location: this.state.location })
+	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
 	            );
 	        }
 	    }]);
@@ -38862,6 +38864,10 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _line = __webpack_require__(/*! ./line.jsx */ 176);
+	
+	var _line2 = _interopRequireDefault(_line);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38876,31 +38882,29 @@
 	    function mapLocationDetails(props) {
 	        _classCallCheck(this, mapLocationDetails);
 	
-	        var _this = _possibleConstructorReturn(this, (mapLocationDetails.__proto__ || Object.getPrototypeOf(mapLocationDetails)).call(this, props));
-	
-	        _this.state = { prevLocation: null };
-	        return _this;
+	        return _possibleConstructorReturn(this, (mapLocationDetails.__proto__ || Object.getPrototypeOf(mapLocationDetails)).call(this, props));
 	    }
 	
 	    _createClass(mapLocationDetails, [{
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps() {
-	            this.setState({ prevLocation: this.props.location ? this.props.location : this.props.prevLocation });
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var location = this.props.location;
-	            var prevLocation = this.state.prevLocation;
+	            var center = {
+	                x: location.coordinates.x + 30,
+	                y: location.coordinates.y - 30
+	            };
+	            var left = _lodash2.default.get(center, 'x', 0) - 10; // _.get(prevLocation, 'coordinates.x', 0)) - 10;
+	            var top = _lodash2.default.get(center, 'y', 0) - 10; //_.get(prevLocation, 'coordinates.y', 0)) - 10;
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'locationContainer',
 	                    className: location ? "show" : "",
 	                    style: {
-	                        left: _lodash2.default.get(location, 'coordinates.x', _lodash2.default.get(prevLocation, 'coordinates.x', 0)) + '%',
-	                        top: _lodash2.default.get(location, 'coordinates.y', _lodash2.default.get(prevLocation, 'coordinates.y', 0)) + '%'
+	                        left: left + '%',
+	                        top: top + '%'
 	                    } },
-	                _react2.default.createElement('img', { src: 'resources/woods1.webp' })
+	                _react2.default.createElement('img', { src: 'resources/woods1.webp' }),
+	                _react2.default.createElement(_line2.default, { begin: center, end: location.coordinates })
 	            );
 	        }
 	    }]);
@@ -38909,6 +38913,70 @@
 	}(_react2.default.Component);
 	
 	exports.default = mapLocationDetails;
+
+/***/ },
+/* 176 */
+/*!*********************************!*\
+  !*** ./src/client/app/line.jsx ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var viewportPercentRatio = 5;
+	
+	var Line = function (_React$Component) {
+	    _inherits(Line, _React$Component);
+	
+	    function Line(props) {
+	        _classCallCheck(this, Line);
+	
+	        return _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).call(this, props));
+	    }
+	
+	    _createClass(Line, [{
+	        key: 'render',
+	        value: function render() {
+	            var begin = this.props.begin;
+	            var end = this.props.end;
+	            var dx = window.innerWidth * (begin.x - end.x) / 100;
+	            var dy = window.innerHeight * (begin.y - end.y) / 100;
+	            var dist = Math.sqrt(Math.pow(dy, 2) + Math.pow(dx, 2));
+	            var angle = Math.atan2(dy, dx) - Math.PI;
+	            return _react2.default.createElement('div', { className: 'line',
+	                style: {
+	                    width: dist + 'px',
+	                    transform: 'rotateZ(' + angle + 'rad)'
+	                } });
+	        }
+	    }]);
+	
+	    return Line;
+	}(_react2.default.Component);
+	
+	exports.default = Line;
 
 /***/ }
 /******/ ]);
