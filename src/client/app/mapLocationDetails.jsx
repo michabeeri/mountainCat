@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Line from './line.jsx';
 
-class mapLocationDetails extends React.Component {
+class MapLocationDetails extends React.Component {
 
     constructor(props) {
         super(props);
@@ -30,4 +30,4 @@ class mapLocationDetails extends React.Component {
     }
 }
 
-export default mapLocationDetails;
+export default MapLocationDetails;

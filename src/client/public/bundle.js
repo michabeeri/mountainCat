@@ -22007,6 +22007,14 @@
 	
 	var _mapLocationDetails2 = _interopRequireDefault(_mapLocationDetails);
 	
+	var _marker = __webpack_require__(/*! ./marker.jsx */ 246);
+	
+	var _marker2 = _interopRequireDefault(_marker);
+	
+	var _line = __webpack_require__(/*! ./line.jsx */ 176);
+	
+	var _line2 = _interopRequireDefault(_line);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22022,6 +22030,8 @@
 	    }
 	};
 	
+	var locations = [{ id: 'STRT', coordinates: { x: 44, y: 92 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 30, y: 65 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 70, y: 68 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 56, y: 54 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 12, y: 34 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 72, y: 38 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 42, y: 30 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 50, y: 16 }, siblings: ['BRDG'] }];
+	
 	var conditional = function conditional(condition, jsx) {
 	    return condition && jsx;
 	};
@@ -22036,6 +22046,8 @@
 	
 	        _this.state = { location: null };
 	        _this.onClick = _this.onClick.bind(_this);
+	        _this.connectSiblings = _this.connectSiblings.bind(_this);
+	        _this.createPath = _this.createPath.bind(_this);
 	        return _this;
 	    }
 	
@@ -22047,6 +22059,35 @@
 	        key: 'onClick',
 	        value: function onClick(event) {
 	            this.setState({ location: this.state.location ? null : location });
+	        }
+	    }, {
+	        key: 'getLocationById',
+	        value: function getLocationById(id) {
+	            return _lodash2.default.find(locations, { id: id });
+	        }
+	    }, {
+	        key: 'connectSiblings',
+	        value: function connectSiblings(from) {
+	            return _lodash2.default.map(from.siblings, function (s) {
+	                return {
+	                    begin: from.coordinates,
+	                    end: this.getLocationById(s).coordinates,
+	                    key: from.id + this.getLocationById(s).id
+	                };
+	            }.bind(this));
+	        }
+	    }, {
+	        key: 'createPath',
+	        value: function createPath() {
+	            var path = _lodash2.default.map(locations, function (val) {
+	                return this.connectSiblings(val);
+	            }.bind(this));
+	
+	            path = _lodash2.default.flatten(path);
+	
+	            return _lodash2.default.map(path, function (l) {
+	                return _react2.default.createElement(_line2.default, { begin: l.begin, end: l.end, key: l.key, tt: l.key });
+	            });
 	        }
 	    }, {
 	        key: 'render',
@@ -22069,6 +22110,10 @@
 	                        'laughing steppes'
 	                    )
 	                ),
+	                _lodash2.default.map(locations, function (l, i) {
+	                    return _react2.default.createElement(_marker2.default, { key: "marker" + i, location: l });
+	                }),
+	                this.createPath(),
 	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
 	            );
 	        }
@@ -38876,16 +38921,16 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var mapLocationDetails = function (_React$Component) {
-	    _inherits(mapLocationDetails, _React$Component);
+	var MapLocationDetails = function (_React$Component) {
+	    _inherits(MapLocationDetails, _React$Component);
 	
-	    function mapLocationDetails(props) {
-	        _classCallCheck(this, mapLocationDetails);
+	    function MapLocationDetails(props) {
+	        _classCallCheck(this, MapLocationDetails);
 	
-	        return _possibleConstructorReturn(this, (mapLocationDetails.__proto__ || Object.getPrototypeOf(mapLocationDetails)).call(this, props));
+	        return _possibleConstructorReturn(this, (MapLocationDetails.__proto__ || Object.getPrototypeOf(MapLocationDetails)).call(this, props));
 	    }
 	
-	    _createClass(mapLocationDetails, [{
+	    _createClass(MapLocationDetails, [{
 	        key: 'render',
 	        value: function render() {
 	            var location = this.props.location;
@@ -38909,10 +38954,10 @@
 	        }
 	    }]);
 	
-	    return mapLocationDetails;
+	    return MapLocationDetails;
 	}(_react2.default.Component);
 	
-	exports.default = mapLocationDetails;
+	exports.default = MapLocationDetails;
 
 /***/ },
 /* 176 */
@@ -38945,8 +38990,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var viewportPercentRatio = 5;
-	
 	var Line = function (_React$Component) {
 	    _inherits(Line, _React$Component);
 	
@@ -38957,18 +39000,38 @@
 	    }
 	
 	    _createClass(Line, [{
-	        key: 'render',
-	        value: function render() {
+	        key: 'getLineParams',
+	        value: function getLineParams() {
+	            var viewport = {
+	                w: window.innerWidth,
+	                h: window.innerHeight
+	            };
+	
 	            var begin = this.props.begin;
 	            var end = this.props.end;
-	            var dx = window.innerWidth * (begin.x - end.x) / 100;
-	            var dy = window.innerHeight * (begin.y - end.y) / 100;
+	            var dx = viewport.w * (begin.x - end.x) / 100;
+	            var dy = viewport.h * (begin.y - end.y) / 100;
 	            var dist = Math.sqrt(Math.pow(dy, 2) + Math.pow(dx, 2));
 	            var angle = Math.atan2(dy, dx) - Math.PI;
+	
+	            return {
+	                x: viewport.w * begin.x / 100,
+	                y: viewport.h * begin.y / 100,
+	                d: dist,
+	                a: angle
+	            };
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var lineParams = this.getLineParams();
 	            return _react2.default.createElement('div', { className: 'line',
+	                'data-metaatt': this.props.tt,
 	                style: {
-	                    width: dist + 'px',
-	                    transform: 'rotateZ(' + angle + 'rad)'
+	                    top: lineParams.y + 'px',
+	                    left: lineParams.x + 'px',
+	                    width: lineParams.d + 'px',
+	                    transform: 'rotateZ(' + lineParams.a + 'rad)'
 	                } });
 	        }
 	    }]);
@@ -38977,6 +39040,137 @@
 	}(_react2.default.Component);
 	
 	exports.default = Line;
+
+/***/ },
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */
+/*!***********************************!*\
+  !*** ./src/client/app/marker.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Marker = function (_React$Component) {
+	    _inherits(Marker, _React$Component);
+	
+	    function Marker(props) {
+	        _classCallCheck(this, Marker);
+	
+	        return _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).call(this, props));
+	    }
+	
+	    _createClass(Marker, [{
+	        key: 'render',
+	        value: function render() {
+	            var left = this.props.location.coordinates.x - 4;
+	            var top = this.props.location.coordinates.y - 4;
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'marker',
+	                    style: {
+	                        left: left + '%',
+	                        top: top + '%'
+	                    } },
+	                _react2.default.createElement('img', { src: 'resources/marker.webp' })
+	            );
+	        }
+	    }]);
+	
+	    return Marker;
+	}(_react2.default.Component);
+	
+	exports.default = Marker;
 
 /***/ }
 /******/ ]);
