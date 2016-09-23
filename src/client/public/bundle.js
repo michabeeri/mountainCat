@@ -22007,7 +22007,7 @@
 	
 	var _mapLocationDetails2 = _interopRequireDefault(_mapLocationDetails);
 	
-	var _marker = __webpack_require__(/*! ./marker.jsx */ 246);
+	var _marker = __webpack_require__(/*! ./marker.jsx */ 177);
 	
 	var _marker2 = _interopRequireDefault(_marker);
 	
@@ -22046,8 +22046,6 @@
 	
 	        _this.state = { location: null };
 	        _this.onClick = _this.onClick.bind(_this);
-	        _this.connectSiblings = _this.connectSiblings.bind(_this);
-	        _this.createPath = _this.createPath.bind(_this);
 	        return _this;
 	    }
 	
@@ -22066,28 +22064,34 @@
 	            return _lodash2.default.find(locations, { id: id });
 	        }
 	    }, {
-	        key: 'connectSiblings',
-	        value: function connectSiblings(from) {
-	            return _lodash2.default.map(from.siblings, function (s) {
+	        key: 'createRoutes',
+	        value: function createRoutes(location) {
+	            var _this2 = this;
+	
+	            return _lodash2.default.map(location.siblings, function (s) {
 	                return {
-	                    begin: from.coordinates,
-	                    end: this.getLocationById(s).coordinates,
-	                    key: from.id + this.getLocationById(s).id
+	                    begin: location.coordinates,
+	                    end: _this2.getLocationById(s).coordinates,
+	                    key: location.id + _this2.getLocationById(s).id
 	                };
-	            }.bind(this));
+	            });
 	        }
 	    }, {
 	        key: 'createPath',
 	        value: function createPath() {
-	            var path = _lodash2.default.map(locations, function (val) {
-	                return this.connectSiblings(val);
-	            }.bind(this));
+	            var _this3 = this;
 	
-	            path = _lodash2.default.flatten(path);
-	
-	            return _lodash2.default.map(path, function (l) {
+	            return (0, _lodash2.default)(locations).map(function (l) {
+	                return _this3.createRoutes(l);
+	            }).flatten().map(function (l) {
 	                return _react2.default.createElement(_line2.default, { begin: l.begin, end: l.end, key: l.key, tt: l.key });
-	            });
+	            }).value();
+	            //
+	            // var path = _(locations).map(l => this.createRoutes(l)).flatten(path).value();
+	            //
+	            // return _.map(path, function(l){
+	            //     return <Line begin={l.begin} end={l.end} key={l.key} tt={l.key}/>;
+	            // })
 	        }
 	    }, {
 	        key: 'render',
@@ -39042,76 +39046,7 @@
 	exports.default = Line;
 
 /***/ },
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */
+/* 177 */
 /*!***********************************!*\
   !*** ./src/client/app/marker.jsx ***!
   \***********************************/

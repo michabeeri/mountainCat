@@ -31,9 +31,6 @@ class Map extends React.Component {
     constructor(props) {
         super(props);
         this.state = {location: null};
-        this.onClick = this.onClick.bind(this);
-        this.connectSiblings = this.connectSiblings.bind(this);
-        this.createPath = this.createPath.bind(this);
     }
 
     // onLocationSelected (event) {
@@ -44,31 +41,25 @@ class Map extends React.Component {
         this.setState({location: this.state.location ? null : location});
     }
 
-    getLocationById(id){
+    getLocationById (id) {
         return _.find(locations, {id: id});
     }
 
-    connectSiblings (from) {
-        return _.map(from.siblings, function(s){return {
-                begin: from.coordinates,
-                end: this.getLocationById(s).coordinates,
-                key: from.id + this.getLocationById(s).id
-            };}.bind(this));
+    createRoutes (location) {
+        return _.map(location.siblings, s => ({
+            begin: location.coordinates,
+            end: this.getLocationById(s).coordinates,
+            key: location.id + this.getLocationById(s).id
+        }));
     }
 
     createPath () {
-        var path = _.map(locations, function(val){
-            return this.connectSiblings(val);
-        }.bind(this));
-
-        path = _.flatten(path);
-
-        return _.map(path, function(l){
-            return <Line begin={l.begin} end={l.end} key={l.key} tt={l.key}/>;
-        })
+        return _(locations)
+            .map(l => this.createRoutes(l))
+            .flatten()
+            .map(l => (<Line begin={l.begin} end={l.end} key={l.key} tt={l.key}/>))
+            .value();
     }
-
-
 
     render() {
         var currentLocation = this.state.location;
