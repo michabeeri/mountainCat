@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 var route = {
     begin: [100, 100],
-    route: [150, 120, 220, 270, 300, 300],
+    route: [165, 365, 250, 350, 242, 326],
     progress: 0.5
 }
 
@@ -28,10 +28,15 @@ class CanvasApi extends React.Component {
         var canvas = this.refs.canvas;
         var ctx = canvas.getContext('2d');
 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.setLineDash([8, 15]);
         ctx.beginPath();
-        ctx.moveTo(...path[0].begin);
-        ctx.bezierCurveTo(...path[0].route);
+
+        _.forEach(path, p => {
+            ctx.moveTo(...p.begin);
+            ctx.bezierCurveTo(...p.route);
+        });
+
         ctx.lineWidth = 2;
 
         // set line color
@@ -41,7 +46,7 @@ class CanvasApi extends React.Component {
 
     render() {
         return (
-            <canvas id="pathCanvas" ref="canvas" width={window.innerWidth} height={window.innerHeight}></canvas>
+            <canvas id="pathCanvas" ref="canvas" width='320px' height='480px'></canvas>
         );
     }
 }

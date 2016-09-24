@@ -87,7 +87,16 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { id: 'appContainer' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'bannerContainer animate' },
+	                    _react2.default.createElement(
+	                        'h3',
+	                        { className: 'mapName' },
+	                        'laughing steppes'
+	                    )
+	                ),
 	                _react2.default.createElement(_map2.default, null),
 	                _react2.default.createElement(_primaryPanel2.default, null)
 	            );
@@ -22037,7 +22046,7 @@
 	    }
 	};
 	
-	var locations = [{ id: 'STRT', coordinates: { x: 44, y: 92 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 30, y: 65 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 70, y: 68 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 56, y: 54 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 12, y: 34 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 72, y: 38 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 42, y: 30 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 50, y: 16 }, siblings: ['BRDG'] }];
+	var locations = [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }];
 	
 	var conditional = function conditional(condition, jsx) {
 	    return condition && jsx;
@@ -22099,25 +22108,12 @@
 	            var currentLocation = this.state.location;
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'map', onClick: this.onClick.bind(this) },
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'mapContainer', className: currentLocation ? "unfocus" : "" },
-	                    _react2.default.createElement('img', { src: 'resources/demoMapTransperent.webp' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'bannerContainer animate' },
-	                    _react2.default.createElement(
-	                        'h3',
-	                        { className: 'mapName' },
-	                        'laughing steppes'
-	                    )
-	                ),
+	                { id: 'map', onClick: this.onClick.bind(this) },
+	                _react2.default.createElement('div', { id: 'mapBackground', className: currentLocation ? "unfocus" : "" }),
 	                _lodash2.default.map(locations, function (l, i) {
 	                    return _react2.default.createElement(_marker2.default, { key: "marker" + i, location: l });
 	                }),
-	                _react2.default.createElement(_CanvasApi2.default, { path: [{ begin: [100, 100], route: [150, 120, 220, 270, 300, 300] }] }),
+	                _react2.default.createElement(_CanvasApi2.default, { path: [{ begin: [141, 442], route: [165, 365, 250, 350, 242, 326] }, { begin: [141, 442], route: [80, 385, 150, 360, 96, 312] }] }),
 	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
 	            );
 	        }
@@ -39088,17 +39084,13 @@
 	    _createClass(Marker, [{
 	        key: 'render',
 	        value: function render() {
-	            var left = this.props.location.coordinates.x - 4;
-	            var top = this.props.location.coordinates.y - 4;
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'marker',
-	                    style: {
-	                        left: left + '%',
-	                        top: top + '%'
-	                    } },
-	                _react2.default.createElement('img', { src: 'resources/marker.webp' })
-	            );
+	            var left = this.props.location.coordinates.x - 12;
+	            var top = this.props.location.coordinates.y - 12;
+	            return _react2.default.createElement('div', { className: 'marker',
+	                style: {
+	                    left: left + 'px',
+	                    top: top + 'px'
+	                } });
 	        }
 	    }]);
 	
@@ -39238,7 +39230,7 @@
 	
 	var route = {
 	    begin: [100, 100],
-	    route: [150, 120, 220, 270, 300, 300],
+	    route: [165, 365, 250, 350, 242, 326],
 	    progress: 0.5
 	};
 	
@@ -39272,10 +39264,15 @@
 	            var canvas = this.refs.canvas;
 	            var ctx = canvas.getContext('2d');
 	
+	            ctx.clearRect(0, 0, canvas.width, canvas.height);
 	            ctx.setLineDash([8, 15]);
 	            ctx.beginPath();
-	            ctx.moveTo.apply(ctx, _toConsumableArray(path[0].begin));
-	            ctx.bezierCurveTo.apply(ctx, _toConsumableArray(path[0].route));
+	
+	            _lodash2.default.forEach(path, function (p) {
+	                ctx.moveTo.apply(ctx, _toConsumableArray(p.begin));
+	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(p.route));
+	            });
+	
 	            ctx.lineWidth = 2;
 	
 	            // set line color
@@ -39285,7 +39282,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement('canvas', { id: 'pathCanvas', ref: 'canvas', width: window.innerWidth, height: window.innerHeight });
+	            return _react2.default.createElement('canvas', { id: 'pathCanvas', ref: 'canvas', width: '320px', height: '480px' });
 	        }
 	    }]);
 	

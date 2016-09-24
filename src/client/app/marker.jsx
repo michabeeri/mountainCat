@@ -8,15 +8,14 @@ class Marker extends React.Component {
     }
 
     render() {
-        var left = this.props.location.coordinates.x - 4;
-        var top = this.props.location.coordinates.y - 4;
+        var left = this.props.location.coordinates.x - 12;
+        var top = this.props.location.coordinates.y - 12;
         return (
             <div className="marker"
                  style={{
-                     left: left + '%',
-                     top: top + '%'
+                     left: left + 'px',
+                     top: top + 'px'
                  }}>
-                <img src="resources/marker.webp"/>
             </div>
         );
     }

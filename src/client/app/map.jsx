@@ -13,14 +13,14 @@ var location = {
 }
 
 var locations = [
-    {id: 'STRT', coordinates: {x: 44, y: 92}, siblings:['L001', 'R001']},
-    {id: 'L001', coordinates: {x: 30, y: 65}, siblings:['STRT', 'L002']},
-    {id: 'R001',coordinates: {x: 70, y: 68}, siblings:['STRT', 'R002']},
-    {id: 'R002',coordinates: {x: 56, y: 54}, siblings:['R001', 'R003']},
-    {id: 'L002',coordinates: {x: 12, y: 34}, siblings:['L001', 'BRDG']},
-    {id: 'R003', coordinates: {x: 72, y: 38}, siblings:['R002', 'BRDG']},
-    {id: 'BRDG', coordinates: {x: 42, y: 30}, siblings:['L002', 'R003', 'FINL']},
-    {id: 'FINL', coordinates: {x: 50, y: 16}, siblings:['BRDG']}
+    {id: 'STRT', coordinates: {x: 141, y: 442}, siblings:['L001', 'R001']},
+    {id: 'L001', coordinates: {x: 96, y: 312}, siblings:['STRT', 'L002']},
+    {id: 'R001',coordinates: {x: 242, y: 326}, siblings:['STRT', 'R002']},
+    {id: 'R002',coordinates: {x: 179, y: 259}, siblings:['R001', 'R003']},
+    {id: 'L002',coordinates: {x: 38, y: 163}, siblings:['L001', 'BRDG']},
+    {id: 'R003', coordinates: {x: 230, y: 182}, siblings:['R002', 'BRDG']},
+    {id: 'BRDG', coordinates: {x: 134, y: 144}, siblings:['L002', 'R003', 'FINL']},
+    {id: 'FINL', coordinates: {x: 160, y: 77}, siblings:['BRDG']}
 
 
 ];
@@ -65,17 +65,13 @@ class Map extends React.Component {
     render() {
         var currentLocation = this.state.location;
         return (
-            <div className="map" onClick={this.onClick.bind(this)}>
-                <div id="mapContainer" className={currentLocation ? "unfocus" : ""}>
-                    <img src="resources/demoMapTransperent.webp"/>
-                </div>
-                <div className="bannerContainer animate">
-                    <h3 className="mapName">laughing steppes</h3>
-                </div>
+            <div id="map" onClick={this.onClick.bind(this)}>
+                <div id="mapBackground" className={currentLocation ? "unfocus" : ""}/>
                 {_.map(locations, function(l, i){return <Marker key={"marker" + i} location={l}/>;})}
                 {/*{this.createPath()}*/}
                 <CanvasApi path={[
-                    {begin: [100, 100], route: [150, 120, 220, 270, 300, 300]}
+                    {begin: [141, 442], route: [165, 365, 250, 350, 242, 326]},
+                    {begin: [141, 442], route: [80, 385, 150, 360, 96, 312]}
                 ]}/>
                 {conditional(currentLocation, <MapLocationDetails location={currentLocation}/>)}
             </div>
