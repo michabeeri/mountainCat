@@ -29,7 +29,7 @@ class CanvasApi extends React.Component {
         var ctx = canvas.getContext('2d');
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.setLineDash([8, 15]);
+        ctx.setLineDash([10, 15]);
         ctx.beginPath();
 
         _.forEach(path, p => {

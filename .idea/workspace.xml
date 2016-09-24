@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce7e0c67-57cb-482f-9fc3-de840d81bf0b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/resources/marker.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/resources/marker.webp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/canvasApi.jsx" afterPath="$PROJECT_DIR$/src/client/app/canvasApi.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/index.jsx" afterPath="$PROJECT_DIR$/src/client/app/index.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/map.jsx" afterPath="$PROJECT_DIR$/src/client/app/map.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/marker.jsx" afterPath="$PROJECT_DIR$/src/client/app/marker.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/css/main.css" afterPath="$PROJECT_DIR$/src/client/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/public/bundle.js" afterPath="$PROJECT_DIR$/src/client/public/bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/public/bundle.js.map" afterPath="$PROJECT_DIR$/src/client/public/bundle.js.map" />
     </list>
@@ -61,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="canvasApi.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="canvasApi.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/app/canvasApi.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="442">
+              <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -83,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="map.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/app/map.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="73" column="76" selection-start-line="73" selection-start-column="76" selection-end-line="73" selection-end-column="76" />
+            <state relative-caret-position="430">
+              <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -185,8 +179,8 @@
         <option value="$PROJECT_DIR$/src/client/app/marker.jsx" />
         <option value="$PROJECT_DIR$/src/client/app/index.jsx" />
         <option value="$PROJECT_DIR$/src/client/css/main.css" />
-        <option value="$PROJECT_DIR$/src/client/app/map.jsx" />
         <option value="$PROJECT_DIR$/src/client/app/canvasApi.jsx" />
+        <option value="$PROJECT_DIR$/src/client/app/map.jsx" />
       </list>
     </option>
   </component>
@@ -441,15 +435,15 @@
       <updated>1471689053587</updated>
       <workItem from="1471689054784" duration="6558000" />
       <workItem from="1473877545715" duration="6277000" />
-      <workItem from="1473960211671" duration="51377000" />
+      <workItem from="1473960211671" duration="53519000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64212000" />
+    <option name="totallyTimeSpent" value="66354000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17864583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -708,20 +702,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/map.jsx">
+    <entry file="file://$PROJECT_DIR$/src/client/app/canvasApi.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="73" column="76" selection-start-line="73" selection-start-column="76" selection-end-line="73" selection-end-column="76" />
+        <state relative-caret-position="442">
+          <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/canvasApi.jsx">
+    <entry file="file://$PROJECT_DIR$/src/client/app/map.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="430">
+          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

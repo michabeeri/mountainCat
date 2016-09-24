@@ -70,8 +70,11 @@ class Map extends React.Component {
                 {_.map(locations, function(l, i){return <Marker key={"marker" + i} location={l}/>;})}
                 {/*{this.createPath()}*/}
                 <CanvasApi path={[
-                    {begin: [141, 442], route: [165, 365, 250, 350, 242, 326]},
-                    {begin: [141, 442], route: [80, 385, 150, 360, 96, 312]}
+                    {id:"STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334]},
+                    {id:"R001R002", begin: [234, 318], route: [220, 290, 230, 350, 187, 267]},
+                    {id:"R002R003", begin: [181, 251], route: [190, 220, 210, 200, 222, 190]},
+                    {id:"STRTL001", begin: [133, 434], route: [80, 385, 150, 360, 104, 320]},
+                    {id:"L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171]}
                 ]}/>
                 {conditional(currentLocation, <MapLocationDetails location={currentLocation}/>)}
             </div>
