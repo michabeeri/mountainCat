@@ -22018,6 +22018,10 @@
 	
 	var _line2 = _interopRequireDefault(_line);
 	
+	var _CanvasApi = __webpack_require__(/*! ./CanvasApi.jsx */ 179);
+	
+	var _CanvasApi2 = _interopRequireDefault(_CanvasApi);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22113,7 +22117,7 @@
 	                _lodash2.default.map(locations, function (l, i) {
 	                    return _react2.default.createElement(_marker2.default, { key: "marker" + i, location: l });
 	                }),
-	                this.createPath(),
+	                _react2.default.createElement(_CanvasApi2.default, { path: [{ begin: [100, 100], route: [150, 120, 220, 270, 300, 300] }] }),
 	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
 	            );
 	        }
@@ -39198,6 +39202,97 @@
 	}(_react2.default.Component);
 	
 	exports.default = PrimaryPanel;
+
+/***/ },
+/* 179 */
+/*!**************************************!*\
+  !*** ./src/client/app/CanvasApi.jsx ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var route = {
+	    begin: [100, 100],
+	    route: [150, 120, 220, 270, 300, 300],
+	    progress: 0.5
+	};
+	
+	var conditional = function conditional(condition, jsx) {
+	    return condition && jsx;
+	};
+	
+	var CanvasApi = function (_React$Component) {
+	    _inherits(CanvasApi, _React$Component);
+	
+	    function CanvasApi(props) {
+	        _classCallCheck(this, CanvasApi);
+	
+	        return _possibleConstructorReturn(this, (CanvasApi.__proto__ || Object.getPrototypeOf(CanvasApi)).call(this, props));
+	    }
+	
+	    _createClass(CanvasApi, [{
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            this.draw();
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.draw();
+	        }
+	    }, {
+	        key: 'draw',
+	        value: function draw() {
+	            var path = this.props.path;
+	            var canvas = this.refs.canvas;
+	            var ctx = canvas.getContext('2d');
+	
+	            ctx.setLineDash([8, 15]);
+	            ctx.beginPath();
+	            ctx.moveTo.apply(ctx, _toConsumableArray(path[0].begin));
+	            ctx.bezierCurveTo.apply(ctx, _toConsumableArray(path[0].route));
+	            ctx.lineWidth = 2;
+	
+	            // set line color
+	            ctx.strokeStyle = '#ff0000';
+	            ctx.stroke();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement('canvas', { id: 'pathCanvas', ref: 'canvas', width: window.innerWidth, height: window.innerHeight });
+	        }
+	    }]);
+	
+	    return CanvasApi;
+	}(_react2.default.Component);
+	
+	exports.default = CanvasApi;
 
 /***/ }
 /******/ ]);

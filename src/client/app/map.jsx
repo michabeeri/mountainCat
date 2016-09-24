@@ -3,6 +3,7 @@ import _ from 'lodash';
 import MapLocationDetails from './mapLocationDetails.jsx';
 import Marker from './marker.jsx';
 import Line from './line.jsx';
+import CanvasApi from './CanvasApi.jsx';
 
 var location = {
     coordinates: {
@@ -72,7 +73,10 @@ class Map extends React.Component {
                     <h3 className="mapName">laughing steppes</h3>
                 </div>
                 {_.map(locations, function(l, i){return <Marker key={"marker" + i} location={l}/>;})}
-                {this.createPath()}
+                {/*{this.createPath()}*/}
+                <CanvasApi path={[
+                    {begin: [100, 100], route: [150, 120, 220, 270, 300, 300]}
+                ]}/>
                 {conditional(currentLocation, <MapLocationDetails location={currentLocation}/>)}
             </div>
         );

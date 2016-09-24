@@ -140,3 +140,9 @@ body {
     color: white;
     padding: 4px;
 }
+
+#pathCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
