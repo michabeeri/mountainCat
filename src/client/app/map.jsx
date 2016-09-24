@@ -64,7 +64,7 @@ class Map extends React.Component {
     render() {
         var currentLocation = this.state.location;
         return (
-            <div className="map" onClick={this.onClick}>
+            <div className="map" onClick={this.onClick.bind(this)}>
                 <div id="mapContainer" className={currentLocation ? "unfocus" : ""}>
                     <img src="resources/demoMapTransperent.webp"/>
                 </div>

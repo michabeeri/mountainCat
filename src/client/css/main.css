@@ -102,3 +102,41 @@ body {
 .marker > img {
     width: 100%;
 }
+
+#primaryPanel {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.panelIndicator {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#hungerIndicator {
+    background: no-repeat center/100% url(../resources/food.png);
+}
+#thirstIndicator {
+    background: no-repeat center/100% url(../resources/bottle.png);
+}
+#restIndicator {
+    background: no-repeat center/100% url(../resources/pillow.png);
+}
+#healthIndicator {
+    background: no-repeat center/100% url(../resources/life.png);
+}
+
+.panelIndicator h6 {
+    margin: 0;
+    font: normal small-caps 600 14px/1 'Muli', sans-serif;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 4px;
+}

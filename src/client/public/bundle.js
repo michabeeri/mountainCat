@@ -61,6 +61,10 @@
 	
 	var _map2 = _interopRequireDefault(_map);
 	
+	var _primaryPanel = __webpack_require__(/*! ./primaryPanel.jsx */ 178);
+	
+	var _primaryPanel2 = _interopRequireDefault(_primaryPanel);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68,8 +72,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// import PixiEngine from './pixiEngine.jsx';
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -86,7 +88,8 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_map2.default, null)
+	                _react2.default.createElement(_map2.default, null),
+	                _react2.default.createElement(_primaryPanel2.default, null)
 	            );
 	        }
 	    }]);
@@ -22045,7 +22048,6 @@
 	        var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 	
 	        _this.state = { location: null };
-	        _this.onClick = _this.onClick.bind(_this);
 	        return _this;
 	    }
 	
@@ -22086,12 +22088,6 @@
 	            }).flatten().map(function (l) {
 	                return _react2.default.createElement(_line2.default, { begin: l.begin, end: l.end, key: l.key, tt: l.key });
 	            }).value();
-	            //
-	            // var path = _(locations).map(l => this.createRoutes(l)).flatten(path).value();
-	            //
-	            // return _.map(path, function(l){
-	            //     return <Line begin={l.begin} end={l.end} key={l.key} tt={l.key}/>;
-	            // })
 	        }
 	    }, {
 	        key: 'render',
@@ -22099,7 +22095,7 @@
 	            var currentLocation = this.state.location;
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'map', onClick: this.onClick },
+	                { className: 'map', onClick: this.onClick.bind(this) },
 	                _react2.default.createElement(
 	                    'div',
 	                    { id: 'mapContainer', className: currentLocation ? "unfocus" : "" },
@@ -39106,6 +39102,102 @@
 	}(_react2.default.Component);
 	
 	exports.default = Marker;
+
+/***/ },
+/* 178 */
+/*!*****************************************!*\
+  !*** ./src/client/app/primaryPanel.jsx ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var conditional = function conditional(condition, jsx) {
+	    return condition && jsx;
+	};
+	
+	var PrimaryPanel = function (_React$Component) {
+	    _inherits(PrimaryPanel, _React$Component);
+	
+	    function PrimaryPanel(props) {
+	        _classCallCheck(this, PrimaryPanel);
+	
+	        return _possibleConstructorReturn(this, (PrimaryPanel.__proto__ || Object.getPrototypeOf(PrimaryPanel)).call(this, props));
+	        // this.state = {location: null};
+	    }
+	
+	    _createClass(PrimaryPanel, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { id: 'primaryPanel' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'hungerIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'thirstIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'restIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'healthIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return PrimaryPanel;
+	}(_react2.default.Component);
+	
+	exports.default = PrimaryPanel;
 
 /***/ }
 /******/ ]);
