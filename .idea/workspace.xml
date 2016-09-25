@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce7e0c67-57cb-482f-9fc3-de840d81bf0b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/route.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/canvasApi.jsx" afterPath="$PROJECT_DIR$/src/client/app/canvasApi.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/map.jsx" afterPath="$PROJECT_DIR$/src/client/app/map.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/css/main.css" afterPath="$PROJECT_DIR$/src/client/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/route.jsx" afterPath="$PROJECT_DIR$/src/client/app/route.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/public/bundle.js" afterPath="$PROJECT_DIR$/src/client/public/bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/public/bundle.js.map" afterPath="$PROJECT_DIR$/src/client/public/bundle.js.map" />
     </list>
@@ -31,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="841">
@@ -82,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="route.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="route.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/app/route.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+            <state relative-caret-position="476">
+              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -184,10 +180,10 @@
         <option value="$PROJECT_DIR$/src/client/app/marker.jsx" />
         <option value="$PROJECT_DIR$/src/client/app/index.jsx" />
         <option value="$PROJECT_DIR$/src/client/app/route.js" />
-        <option value="$PROJECT_DIR$/src/client/app/route.jsx" />
         <option value="$PROJECT_DIR$/src/client/app/canvasApi.jsx" />
         <option value="$PROJECT_DIR$/src/client/app/map.jsx" />
         <option value="$PROJECT_DIR$/src/client/css/main.css" />
+        <option value="$PROJECT_DIR$/src/client/app/route.jsx" />
       </list>
     </option>
   </component>
@@ -442,12 +438,12 @@
       <updated>1471689053587</updated>
       <workItem from="1471689054784" duration="6558000" />
       <workItem from="1473877545715" duration="6277000" />
-      <workItem from="1473960211671" duration="56719000" />
+      <workItem from="1473960211671" duration="57922000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69554000" />
+    <option name="totallyTimeSpent" value="70757000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -721,21 +717,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/route.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="841">
           <caret line="157" column="23" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/route.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
