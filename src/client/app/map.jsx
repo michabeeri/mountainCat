@@ -73,8 +73,11 @@ class Map extends React.Component {
                     {id:"STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334]},
                     {id:"R001R002", begin: [234, 318], route: [220, 290, 230, 350, 187, 267]},
                     {id:"R002R003", begin: [181, 251], route: [190, 220, 210, 200, 222, 190]},
+                    {id:"R003BRDG", begin: [218, 182], route: [190, 160, 170, 150, 146, 144]},
                     {id:"STRTL001", begin: [133, 434], route: [80, 385, 150, 360, 104, 320]},
-                    {id:"L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171]}
+                    {id:"L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171]},
+                    {id:"L002BRDG", begin: [46, 155], route: [70, 150, 100, 118, 126, 136]},
+                    {id:"BRDGFINL", begin: [142, 136], route: [145, 120, 152, 100, 160, 89]}
                 ]}/>
                 {conditional(currentLocation, <MapLocationDetails location={currentLocation}/>)}
             </div>

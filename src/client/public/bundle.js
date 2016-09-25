@@ -22113,7 +22113,7 @@
 	                _lodash2.default.map(locations, function (l, i) {
 	                    return _react2.default.createElement(_marker2.default, { key: "marker" + i, location: l });
 	                }),
-	                _react2.default.createElement(_CanvasApi2.default, { path: [{ id: "STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334] }, { id: "R001R002", begin: [234, 318], route: [220, 290, 230, 350, 187, 267] }, { id: "R002R003", begin: [181, 251], route: [190, 220, 210, 200, 222, 190] }, { id: "STRTL001", begin: [133, 434], route: [80, 385, 150, 360, 104, 320] }, { id: "L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171] }] }),
+	                _react2.default.createElement(_CanvasApi2.default, { path: [{ id: "STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334] }, { id: "R001R002", begin: [234, 318], route: [220, 290, 230, 350, 187, 267] }, { id: "R002R003", begin: [181, 251], route: [190, 220, 210, 200, 222, 190] }, { id: "R003BRDG", begin: [218, 182], route: [190, 160, 170, 150, 146, 144] }, { id: "STRTL001", begin: [133, 434], route: [80, 385, 150, 360, 104, 320] }, { id: "L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171] }, { id: "L002BRDG", begin: [46, 155], route: [70, 150, 100, 118, 126, 136] }, { id: "BRDGFINL", begin: [142, 136], route: [145, 120, 152, 100, 160, 89] }] }),
 	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
 	            );
 	        }
@@ -39265,7 +39265,7 @@
 	            var ctx = canvas.getContext('2d');
 	
 	            ctx.clearRect(0, 0, canvas.width, canvas.height);
-	            ctx.setLineDash([10, 15]);
+	            ctx.setLineDash([12, 15]);
 	            ctx.beginPath();
 	
 	            _lodash2.default.forEach(path, function (p) {
