@@ -4,6 +4,7 @@ import MapLocationDetails from './mapLocationDetails.jsx';
 import Marker from './marker.jsx';
 import Line from './line.jsx';
 import CanvasApi from './CanvasApi.jsx';
+import Route from './Route.jsx'
 
 var location = {
     coordinates: {
@@ -23,6 +24,17 @@ var locations = [
     {id: 'FINL', coordinates: {x: 160, y: 77}, siblings:['BRDG']}
 
 
+];
+
+var routesData = [
+    {id:"STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334]},
+    {id:"R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267]},
+    {id:"R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190]},
+    {id:"R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144]},
+    {id:"STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320]},
+    {id:"L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171]},
+    {id:"L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136]},
+    {id:"BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89]}
 ];
 
 var conditional = (condition, jsx) => {return condition && jsx};
@@ -46,39 +58,14 @@ class Map extends React.Component {
         return _.find(locations, {id: id});
     }
 
-    createRoutes (location) {
-        return _.map(location.siblings, s => ({
-            begin: location.coordinates,
-            end: this.getLocationById(s).coordinates,
-            key: location.id + this.getLocationById(s).id
-        }));
-    }
-
-    createPath () {
-        return _(locations)
-            .map(l => this.createRoutes(l))
-            .flatten()
-            .map(l => (<Line begin={l.begin} end={l.end} key={l.key} tt={l.key}/>))
-            .value();
-    }
-
     render() {
         var currentLocation = this.state.location;
         return (
             <div id="map" onClick={this.onClick.bind(this)}>
                 <div id="mapBackground" className={currentLocation ? "unfocus" : ""}/>
                 {_.map(locations, function(l, i){return <Marker key={"marker" + i} location={l}/>;})}
-                {/*{this.createPath()}*/}
-                <CanvasApi path={[
-                    {id:"STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334]},
-                    {id:"R001R002", begin: [234, 318], route: [220, 290, 230, 350, 187, 267]},
-                    {id:"R002R003", begin: [181, 251], route: [190, 220, 210, 200, 222, 190]},
-                    {id:"R003BRDG", begin: [218, 182], route: [190, 160, 170, 150, 146, 144]},
-                    {id:"STRTL001", begin: [133, 434], route: [80, 385, 150, 360, 104, 320]},
-                    {id:"L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171]},
-                    {id:"L002BRDG", begin: [46, 155], route: [70, 150, 100, 118, 126, 136]},
-                    {id:"BRDGFINL", begin: [142, 136], route: [145, 120, 152, 100, 160, 89]}
-                ]}/>
+                <CanvasApi path={routesData}/>
+                {_.map(routesData, function(r){return <Route key={r.id} routeData={r}/>;})}
                 {conditional(currentLocation, <MapLocationDetails location={currentLocation}/>)}
             </div>
         );

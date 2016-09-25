@@ -22031,6 +22031,10 @@
 	
 	var _CanvasApi2 = _interopRequireDefault(_CanvasApi);
 	
+	var _Route = __webpack_require__(/*! ./Route.jsx */ 180);
+	
+	var _Route2 = _interopRequireDefault(_Route);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22047,6 +22051,8 @@
 	};
 	
 	var locations = [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }];
+	
+	var routesData = [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334] }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267] }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190] }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144] }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320] }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171] }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136] }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89] }];
 	
 	var conditional = function conditional(condition, jsx) {
 	    return condition && jsx;
@@ -22079,30 +22085,6 @@
 	            return _lodash2.default.find(locations, { id: id });
 	        }
 	    }, {
-	        key: 'createRoutes',
-	        value: function createRoutes(location) {
-	            var _this2 = this;
-	
-	            return _lodash2.default.map(location.siblings, function (s) {
-	                return {
-	                    begin: location.coordinates,
-	                    end: _this2.getLocationById(s).coordinates,
-	                    key: location.id + _this2.getLocationById(s).id
-	                };
-	            });
-	        }
-	    }, {
-	        key: 'createPath',
-	        value: function createPath() {
-	            var _this3 = this;
-	
-	            return (0, _lodash2.default)(locations).map(function (l) {
-	                return _this3.createRoutes(l);
-	            }).flatten().map(function (l) {
-	                return _react2.default.createElement(_line2.default, { begin: l.begin, end: l.end, key: l.key, tt: l.key });
-	            }).value();
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var currentLocation = this.state.location;
@@ -22113,7 +22095,10 @@
 	                _lodash2.default.map(locations, function (l, i) {
 	                    return _react2.default.createElement(_marker2.default, { key: "marker" + i, location: l });
 	                }),
-	                _react2.default.createElement(_CanvasApi2.default, { path: [{ id: "STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334] }, { id: "R001R002", begin: [234, 318], route: [220, 290, 230, 350, 187, 267] }, { id: "R002R003", begin: [181, 251], route: [190, 220, 210, 200, 222, 190] }, { id: "R003BRDG", begin: [218, 182], route: [190, 160, 170, 150, 146, 144] }, { id: "STRTL001", begin: [133, 434], route: [80, 385, 150, 360, 104, 320] }, { id: "L001L002", begin: [88, 304], route: [60, 290, 60, 220, 46, 171] }, { id: "L002BRDG", begin: [46, 155], route: [70, 150, 100, 118, 126, 136] }, { id: "BRDGFINL", begin: [142, 136], route: [145, 120, 152, 100, 160, 89] }] }),
+	                _react2.default.createElement(_CanvasApi2.default, { path: routesData }),
+	                _lodash2.default.map(routesData, function (r) {
+	                    return _react2.default.createElement(_Route2.default, { key: r.id, routeData: r });
+	                }),
 	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
 	            );
 	        }
@@ -39265,12 +39250,12 @@
 	            var ctx = canvas.getContext('2d');
 	
 	            ctx.clearRect(0, 0, canvas.width, canvas.height);
-	            ctx.setLineDash([12, 15]);
+	            ctx.setLineDash([8, 8]);
 	            ctx.beginPath();
 	
 	            _lodash2.default.forEach(path, function (p) {
 	                ctx.moveTo.apply(ctx, _toConsumableArray(p.begin));
-	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(p.route));
+	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(p.control.concat(p.end)));
 	            });
 	
 	            ctx.lineWidth = 2;
@@ -39290,6 +39275,71 @@
 	}(_react2.default.Component);
 	
 	exports.default = CanvasApi;
+
+/***/ },
+/* 180 */
+/*!**********************************!*\
+  !*** ./src/client/app/Route.jsx ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var conditional = function conditional(condition, jsx) {
+	    return condition && jsx;
+	};
+	
+	var Route = function (_React$Component) {
+	    _inherits(Route, _React$Component);
+	
+	    function Route(props) {
+	        _classCallCheck(this, Route);
+	
+	        return _possibleConstructorReturn(this, (Route.__proto__ || Object.getPrototypeOf(Route)).call(this, props));
+	    }
+	    // {id:"STRTR001", begin: [149, 434], route: [165, 365, 250, 350, 236, 334]},
+	
+	
+	    _createClass(Route, [{
+	        key: 'render',
+	        value: function render() {
+	            var routeData = this.props.routeData;
+	            return _react2.default.createElement('div', { className: 'route',
+	                style: {
+	                    left: Math.min(routeData.begin[0], routeData.end[0]) + 'px',
+	                    top: Math.min(routeData.begin[1], routeData.end[1]) + 'px',
+	                    width: Math.abs(routeData.begin[0] - routeData.end[0]) + 'px',
+	                    height: Math.abs(routeData.begin[1] - routeData.end[1]) + 'px'
+	                } });
+	        }
+	    }]);
+	
+	    return Route;
+	}(_react2.default.Component);
+	
+	exports.default = Route;
 
 /***/ }
 /******/ ]);

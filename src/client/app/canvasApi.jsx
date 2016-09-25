@@ -29,12 +29,12 @@ class CanvasApi extends React.Component {
         var ctx = canvas.getContext('2d');
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.setLineDash([12, 15]);
+        ctx.setLineDash([8, 8]);
         ctx.beginPath();
 
         _.forEach(path, p => {
             ctx.moveTo(...p.begin);
-            ctx.bezierCurveTo(...p.route);
+            ctx.bezierCurveTo(...p.control.concat(p.end));
         });
 
         ctx.lineWidth = 2;
