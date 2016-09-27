@@ -158,3 +158,47 @@ body {
     position: absolute;
     background-color: rgba(255,0 ,0 ,0.2);
 }
+
+.routeInfoPanel{
+    width: 70px;
+    height: 70px;
+    background-color: lightslategrey;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    border: 2px solid rgb(62, 64, 64);
+    border-radius: 10px;
+}
+
+.routeInfoPanel.hidden {
+    display: none;
+}
+
+.iconGroup {
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconGroup .icon{
+    width: 18px;
+    height: 18px;
+}
+
+.icon.hidden {
+    visibility: hidden;
+}
+
+.iconGroup.mountain .icon{
+    background: no-repeat center/100% url(../resources/mountain.png);
+}
+
+.iconGroup.river .icon{
+    background: no-repeat center/100% url(../resources/river.png);
+}
+
+.iconGroup.tree .icon{
+    background: no-repeat center/100% url(../resources/tree.png);
+}
+

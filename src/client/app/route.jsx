@@ -1,13 +1,25 @@
 import React from 'react';
 import _ from 'lodash';
+import RouteInfoPanel from './routeInfoPanel.jsx'
 
 var MIN_EDGE = 48;
 var MARGIN = 12;
+var INFO_PANEL_DISTANCE = 60;
+var MAP_CENTER = [160, 240];
+
+var sign = x => x >= 0 ? 1 : -1;
 
 class Route extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {showInfoPanel: false};
+    }
+
+    onClick(){
+        this.setState({
+            showInfoPanel: !this.state.showInfoPanel
+        })
     }
 
     render() {
@@ -34,8 +46,15 @@ class Route extends React.Component {
             top: center.top - responsiveAreaSize.height / 2
         });
 
+        var infoPanelBox = {
+            left: responsiveBoxStyle.left + sign(MAP_CENTER[0] - responsiveBoxStyle.left) * INFO_PANEL_DISTANCE,
+            top: responsiveBoxStyle.top + sign(MAP_CENTER[1] - responsiveBoxStyle.top) * INFO_PANEL_DISTANCE,
+        };
         return (
-            <div className="route" style={responsiveBoxStyle}></div>
+            <div>
+                <div className="route" style={responsiveBoxStyle} onClick={this.onClick.bind(this)}></div>
+                <RouteInfoPanel show={this.state.showInfoPanel} infoPanelBox={infoPanelBox}></RouteInfoPanel>
+            </div>
         );
     }
 }

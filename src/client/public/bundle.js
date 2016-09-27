@@ -61,7 +61,7 @@
 	
 	var _map2 = _interopRequireDefault(_map);
 	
-	var _primaryPanel = __webpack_require__(/*! ./primaryPanel.jsx */ 178);
+	var _primaryPanel = __webpack_require__(/*! ./primaryPanel.jsx */ 181);
 	
 	var _primaryPanel2 = _interopRequireDefault(_primaryPanel);
 	
@@ -22027,11 +22027,11 @@
 	
 	var _line2 = _interopRequireDefault(_line);
 	
-	var _CanvasApi = __webpack_require__(/*! ./CanvasApi.jsx */ 179);
+	var _CanvasApi = __webpack_require__(/*! ./CanvasApi.jsx */ 178);
 	
 	var _CanvasApi2 = _interopRequireDefault(_CanvasApi);
 	
-	var _Route = __webpack_require__(/*! ./Route.jsx */ 180);
+	var _Route = __webpack_require__(/*! ./Route.jsx */ 179);
 	
 	var _Route2 = _interopRequireDefault(_Route);
 	
@@ -39086,102 +39086,6 @@
 
 /***/ },
 /* 178 */
-/*!*****************************************!*\
-  !*** ./src/client/app/primaryPanel.jsx ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(/*! lodash */ 173);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var conditional = function conditional(condition, jsx) {
-	    return condition && jsx;
-	};
-	
-	var PrimaryPanel = function (_React$Component) {
-	    _inherits(PrimaryPanel, _React$Component);
-	
-	    function PrimaryPanel(props) {
-	        _classCallCheck(this, PrimaryPanel);
-	
-	        return _possibleConstructorReturn(this, (PrimaryPanel.__proto__ || Object.getPrototypeOf(PrimaryPanel)).call(this, props));
-	        // this.state = {location: null};
-	    }
-	
-	    _createClass(PrimaryPanel, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { id: 'primaryPanel' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'hungerIndicator', className: 'panelIndicator' },
-	                    _react2.default.createElement(
-	                        'h6',
-	                        null,
-	                        "55"
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'thirstIndicator', className: 'panelIndicator' },
-	                    _react2.default.createElement(
-	                        'h6',
-	                        null,
-	                        "55"
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'restIndicator', className: 'panelIndicator' },
-	                    _react2.default.createElement(
-	                        'h6',
-	                        null,
-	                        "55"
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'healthIndicator', className: 'panelIndicator' },
-	                    _react2.default.createElement(
-	                        'h6',
-	                        null,
-	                        "55"
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return PrimaryPanel;
-	}(_react2.default.Component);
-	
-	exports.default = PrimaryPanel;
-
-/***/ },
-/* 179 */
 /*!**************************************!*\
   !*** ./src/client/app/CanvasApi.jsx ***!
   \**************************************/
@@ -39277,10 +39181,117 @@
 	exports.default = CanvasApi;
 
 /***/ },
-/* 180 */
+/* 179 */
 /*!**********************************!*\
   !*** ./src/client/app/Route.jsx ***!
   \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _routeInfoPanel = __webpack_require__(/*! ./routeInfoPanel.jsx */ 180);
+	
+	var _routeInfoPanel2 = _interopRequireDefault(_routeInfoPanel);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var MIN_EDGE = 48;
+	var MARGIN = 12;
+	var INFO_PANEL_DISTANCE = 60;
+	var MAP_CENTER = [160, 240];
+	
+	var sign = function sign(x) {
+	    return x >= 0 ? 1 : -1;
+	};
+	
+	var Route = function (_React$Component) {
+	    _inherits(Route, _React$Component);
+	
+	    function Route(props) {
+	        _classCallCheck(this, Route);
+	
+	        var _this = _possibleConstructorReturn(this, (Route.__proto__ || Object.getPrototypeOf(Route)).call(this, props));
+	
+	        _this.state = { showInfoPanel: false };
+	        return _this;
+	    }
+	
+	    _createClass(Route, [{
+	        key: 'onClick',
+	        value: function onClick() {
+	            this.setState({
+	                showInfoPanel: !this.state.showInfoPanel
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var routeData = this.props.routeData;
+	            var boundingRect = {
+	                left: Math.min(routeData.begin[0], routeData.end[0]),
+	                top: Math.min(routeData.begin[1], routeData.end[1]),
+	                width: Math.abs(routeData.begin[0] - routeData.end[0]),
+	                height: Math.abs(routeData.begin[1] - routeData.end[1])
+	            };
+	
+	            var center = {
+	                top: boundingRect.top + boundingRect.height / 2,
+	                left: boundingRect.left + boundingRect.width / 2
+	            };
+	
+	            var responsiveAreaSize = {
+	                width: Math.max(boundingRect.width - 2 * MARGIN, MIN_EDGE),
+	                height: Math.max(boundingRect.height - 2 * MARGIN, MIN_EDGE)
+	            };
+	
+	            var responsiveBoxStyle = _lodash2.default.assign(responsiveAreaSize, {
+	                left: center.left - responsiveAreaSize.width / 2,
+	                top: center.top - responsiveAreaSize.height / 2
+	            });
+	
+	            var infoPanelBox = {
+	                left: responsiveBoxStyle.left + sign(MAP_CENTER[0] - responsiveBoxStyle.left) * INFO_PANEL_DISTANCE,
+	                top: responsiveBoxStyle.top + sign(MAP_CENTER[1] - responsiveBoxStyle.top) * INFO_PANEL_DISTANCE
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('div', { className: 'route', style: responsiveBoxStyle, onClick: this.onClick.bind(this) }),
+	                _react2.default.createElement(_routeInfoPanel2.default, { show: this.state.showInfoPanel, infoPanelBox: infoPanelBox })
+	            );
+	        }
+	    }]);
+	
+	    return Route;
+	}(_react2.default.Component);
+	
+	exports.default = Route;
+
+/***/ },
+/* 180 */
+/*!*******************************************!*\
+  !*** ./src/client/app/routeInfoPanel.jsx ***!
+  \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39307,52 +39318,142 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var MIN_EDGE = 48;
-	var MARGIN = 12;
+	var RouteInfoPanel = function (_React$Component) {
+	    _inherits(RouteInfoPanel, _React$Component);
 	
-	var Route = function (_React$Component) {
-	    _inherits(Route, _React$Component);
+	    function RouteInfoPanel(props) {
+	        _classCallCheck(this, RouteInfoPanel);
 	
-	    function Route(props) {
-	        _classCallCheck(this, Route);
-	
-	        return _possibleConstructorReturn(this, (Route.__proto__ || Object.getPrototypeOf(Route)).call(this, props));
+	        return _possibleConstructorReturn(this, (RouteInfoPanel.__proto__ || Object.getPrototypeOf(RouteInfoPanel)).call(this, props));
 	    }
 	
-	    _createClass(Route, [{
+	    _createClass(RouteInfoPanel, [{
+	        key: 'createIconGroup',
+	        value: function createIconGroup(type, count) {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: "iconGroup " + type },
+	                Array(3).fill(0).map(function (e, i) {
+	                    return _react2.default.createElement('div', { className: "icon" + (i >= count ? " hidden" : ""), key: type + 'icon' + i });
+	                })
+	            );
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var routeData = this.props.routeData;
-	            var boundingRect = {
-	                left: Math.min(routeData.begin[0], routeData.end[0]),
-	                top: Math.min(routeData.begin[1], routeData.end[1]),
-	                width: Math.abs(routeData.begin[0] - routeData.end[0]),
-	                height: Math.abs(routeData.begin[1] - routeData.end[1])
-	            };
 	
-	            var center = {
-	                top: boundingRect.top + boundingRect.height / 2,
-	                left: boundingRect.left + boundingRect.width / 2
-	            };
-	
-	            var responsiveAreaSize = {
-	                width: Math.max(boundingRect.width - 2 * MARGIN, MIN_EDGE),
-	                height: Math.max(boundingRect.height - 2 * MARGIN, MIN_EDGE)
-	            };
-	
-	            var responsiveBoxStyle = _lodash2.default.assign(responsiveAreaSize, {
-	                left: center.left - responsiveAreaSize.width / 2,
-	                top: center.top - responsiveAreaSize.height / 2
-	            });
-	
-	            return _react2.default.createElement('div', { className: 'route', style: responsiveBoxStyle });
+	            var infoPanelClass = "routeInfoPanel" + (this.props.show ? "" : " hidden");
+	            return _react2.default.createElement(
+	                'div',
+	                { className: infoPanelClass, style: this.props.infoPanelBox },
+	                this.createIconGroup('mountain', 3),
+	                this.createIconGroup('river', 1),
+	                this.createIconGroup('tree', 2)
+	            );
 	        }
 	    }]);
 	
-	    return Route;
+	    return RouteInfoPanel;
 	}(_react2.default.Component);
 	
-	exports.default = Route;
+	exports.default = RouteInfoPanel;
+
+/***/ },
+/* 181 */
+/*!*****************************************!*\
+  !*** ./src/client/app/primaryPanel.jsx ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var conditional = function conditional(condition, jsx) {
+	    return condition && jsx;
+	};
+	
+	var PrimaryPanel = function (_React$Component) {
+	    _inherits(PrimaryPanel, _React$Component);
+	
+	    function PrimaryPanel(props) {
+	        _classCallCheck(this, PrimaryPanel);
+	
+	        return _possibleConstructorReturn(this, (PrimaryPanel.__proto__ || Object.getPrototypeOf(PrimaryPanel)).call(this, props));
+	        // this.state = {location: null};
+	    }
+	
+	    _createClass(PrimaryPanel, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { id: 'primaryPanel' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'hungerIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'thirstIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'restIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'healthIndicator', className: 'panelIndicator' },
+	                    _react2.default.createElement(
+	                        'h6',
+	                        null,
+	                        "55"
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return PrimaryPanel;
+	}(_react2.default.Component);
+	
+	exports.default = PrimaryPanel;
 
 /***/ }
 /******/ ]);
