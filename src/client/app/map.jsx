@@ -5,6 +5,7 @@ import Marker from './marker.jsx';
 import Line from './line.jsx';
 import CanvasApi from './CanvasApi.jsx';
 import Route from './Route.jsx'
+import { connect } from 'react-redux';
 
 var location = {
     coordinates: {
@@ -39,6 +40,10 @@ var routesData = [
 
 var conditional = (condition, jsx) => {return condition && jsx};
 
+// @connect(state => ({
+//     openedRouteInfoId: state.openedRouteInfoId
+// }))
+
 class Map extends React.Component {
 
     constructor(props) {
@@ -60,16 +65,17 @@ class Map extends React.Component {
 
     render() {
         var currentLocation = this.state.location;
+        var openedRouteInfoId = this.props.openedRouteInfoId;
         return (
             <div id="map" onClick={this.onClick.bind(this)}>
                 <div id="mapBackground" className={currentLocation ? "unfocus" : ""}/>
                 {_.map(locations, function(l, i){return <Marker key={"marker" + i} location={l}/>;})}
                 <CanvasApi path={routesData}/>
-                {_.map(routesData, function(r){return <Route key={r.id} routeData={r}/>;})}
+                {_.map(routesData, function(r){return <Route key={r.id} routeData={r} showInfoPanel={r.id === openedRouteInfoId}/>;})}
                 {conditional(currentLocation, <MapLocationDetails location={currentLocation}/>)}
             </div>
         );
     }
 }
 
-export default Map;
+export default connect(state => ({openedRouteInfoId: state.openedRouteInfoId}))(Map);

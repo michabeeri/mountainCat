@@ -4,6 +4,10 @@ var path = require('path');
 var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
 var APP_DIR = path.resolve(__dirname, 'src/client/app');
 
+var devFlagPlugin = new webpack.DefinePlugin({
+    __DEV__: true//JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+});
+
 var config = {
     entry: APP_DIR + '/index.jsx',
     output: {
@@ -18,7 +22,12 @@ var config = {
                 loader : 'babel'
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        devFlagPlugin
+    ]
 };
 
 module.exports = config;

@@ -53,7 +53,7 @@ class Route extends React.Component {
         return (
             <div>
                 <div className="route" style={responsiveBoxStyle} onClick={this.onClick.bind(this)}></div>
-                <RouteInfoPanel show={this.state.showInfoPanel} infoPanelBox={infoPanelBox}></RouteInfoPanel>
+                <RouteInfoPanel show={this.props.showInfoPanel} infoPanelBox={infoPanelBox}></RouteInfoPanel>
             </div>
         );
     }

@@ -1,0 +1,4 @@
+export default {
+    OPEN_ROUTE_INFO: 'OPEN_ROUTE_INFO',
+    CLOSE_ROUTE_INFO: 'CLOSE_ROUTE_INFO'
+};

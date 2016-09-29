@@ -11,9 +11,12 @@
     "pixi": "^0.3.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-redux": "^4.4.5",
     "webpack": "^1.13.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "redux-devtools": "^3.3.1"
+  },
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack -p"
