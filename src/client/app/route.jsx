@@ -21,7 +21,7 @@ class Route extends React.Component {
         if (this.props.showInfoPanel) {
             return;
         }
-        
+
         this.props.dispatch(actions.openRouteInfo(this.props.routeData.id));
         event.stopPropagation();
     }
@@ -51,13 +51,13 @@ class Route extends React.Component {
         });
 
         var infoPanelBox = {
-            left: responsiveBoxStyle.left + sign(MAP_CENTER[0] - responsiveBoxStyle.left) * INFO_PANEL_DISTANCE,
-            top: responsiveBoxStyle.top + sign(MAP_CENTER[1] - responsiveBoxStyle.top) * INFO_PANEL_DISTANCE,
+            left: center.left + sign(MAP_CENTER[0] - center.left) * INFO_PANEL_DISTANCE,
+            top: center.top + sign(MAP_CENTER[1] - center.top) * INFO_PANEL_DISTANCE,
         };
         return (
             <div>
                 <div className="route" style={responsiveBoxStyle} onClick={this.onClick.bind(this)}></div>
-                <RouteInfoPanel show={this.props.showInfoPanel} infoPanelBox={infoPanelBox}></RouteInfoPanel>
+                <RouteInfoPanel show={this.props.showInfoPanel} infoPanelBox={infoPanelBox} routeData={routeData}></RouteInfoPanel>
             </div>
         );
     }

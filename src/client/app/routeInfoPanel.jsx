@@ -19,6 +19,8 @@ class RouteInfoPanel extends React.Component {
         var infoPanelClass = "routeInfoPanel" + (this.props.show ? "" : " hidden");
         return (
             <div className={infoPanelClass} style={this.props.infoPanelBox}>
+                <h6>{routeData.name}</h6>
+                <div className="separator"></div>
                 {this.createIconGroup('mountain', 3)}
                 {this.createIconGroup('river', 1)}
                 {this.createIconGroup('tree', 2)}

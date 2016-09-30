@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ba989e7d615a99a92cde"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d8d1f90719aa0679757a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -22624,7 +22624,7 @@
 	
 	var locations = [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }];
 	
-	var routesData = [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334] }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267] }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190] }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144] }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320] }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171] }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136] }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89] }];
+	var routesData = [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334], name: 'Brirb Trail' }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267], name: 'Cekipt Route' }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190], name: 'South Fork Trail' }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144], name: 'Tuolumne River Trail' }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320], name: 'Porcupine Creek' }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171], name: 'Parker Pass' }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136], name: 'Glen Aulin' }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89], name: 'Happy Isles' }];
 	
 	var conditional = function conditional(condition, jsx) {
 	    return condition && jsx;
@@ -22675,8 +22675,7 @@
 	                _react2.default.createElement(_CanvasApi2.default, { path: routesData }),
 	                _lodash2.default.map(routesData, function (r) {
 	                    return _react2.default.createElement(_Route2.default, { key: r.id, routeData: r, showInfoPanel: r.id === openedRouteInfoId });
-	                }),
-	                conditional(currentLocation, _react2.default.createElement(_mapLocationDetails2.default, { location: currentLocation }))
+	                })
 	            );
 	        }
 	    }]);
@@ -39696,12 +39695,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var route = {
-	    begin: [100, 100],
-	    route: [165, 365, 250, 350, 242, 326],
-	    progress: 0.5
-	};
-	
 	var conditional = function conditional(condition, jsx) {
 	    return condition && jsx;
 	};
@@ -39744,7 +39737,7 @@
 	            ctx.lineWidth = 2;
 	
 	            // set line color
-	            ctx.strokeStyle = '#ff0000';
+	            ctx.strokeStyle = '#003366'; //'#ff0000';
 	            ctx.stroke();
 	        }
 	    }, {
@@ -39855,14 +39848,14 @@
 	            });
 	
 	            var infoPanelBox = {
-	                left: responsiveBoxStyle.left + sign(MAP_CENTER[0] - responsiveBoxStyle.left) * INFO_PANEL_DISTANCE,
-	                top: responsiveBoxStyle.top + sign(MAP_CENTER[1] - responsiveBoxStyle.top) * INFO_PANEL_DISTANCE
+	                left: center.left + sign(MAP_CENTER[0] - center.left) * INFO_PANEL_DISTANCE,
+	                top: center.top + sign(MAP_CENTER[1] - center.top) * INFO_PANEL_DISTANCE
 	            };
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement('div', { className: 'route', style: responsiveBoxStyle, onClick: this.onClick.bind(this) }),
-	                _react2.default.createElement(_routeInfoPanel2.default, { show: this.props.showInfoPanel, infoPanelBox: infoPanelBox })
+	                _react2.default.createElement(_routeInfoPanel2.default, { show: this.props.showInfoPanel, infoPanelBox: infoPanelBox, routeData: routeData })
 	            );
 	        }
 	    }]);
@@ -39934,6 +39927,12 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: infoPanelClass, style: this.props.infoPanelBox },
+	                _react2.default.createElement(
+	                    'h6',
+	                    null,
+	                    routeData.name
+	                ),
+	                _react2.default.createElement('div', { className: 'separator' }),
 	                this.createIconGroup('mountain', 3),
 	                this.createIconGroup('river', 1),
 	                this.createIconGroup('tree', 2)
@@ -41738,7 +41737,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var initialState = {
-	    openedRouteInfoId: null
+	    openedRouteInfoId: null,
+	    locations: [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }],
+	    routesData: [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334], name: 'Brirb Trail' }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267], name: 'Cekipt Route' }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190], name: 'South Fork Trail' }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144], name: 'Tuolumne River Trail' }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320], name: 'Porcupine Creek' }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171], name: 'Parker Pass' }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136], name: 'Glen Aulin' }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89], name: 'Happy Isles' }]
 	};
 	
 	function main() {

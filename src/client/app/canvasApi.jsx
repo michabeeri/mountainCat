@@ -1,12 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 
-var route = {
-    begin: [100, 100],
-    route: [165, 365, 250, 350, 242, 326],
-    progress: 0.5
-}
-
 var conditional = (condition, jsx) => {return condition && jsx};
 
 class CanvasApi extends React.Component {
@@ -40,7 +34,7 @@ class CanvasApi extends React.Component {
         ctx.lineWidth = 2;
 
         // set line color
-        ctx.strokeStyle = '#ff0000';
+        ctx.strokeStyle = '#003366';//'#ff0000';
         ctx.stroke();
     }
 
