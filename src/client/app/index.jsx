@@ -3,19 +3,15 @@ import {render} from 'react-dom';
 import Map from './map.jsx';
 import PrimaryPanel from './primaryPanel.jsx';
 import { Provider } from 'react-redux';
-import { compose, createStore, combineReducers } from 'redux';
-import main from './reducers/main';
+import { createStore } from 'redux';
+import reducer from './reducers';
 import actions from './actions';
 
-const finalCreateStore = compose(
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore);
-
-const store = finalCreateStore(main);
+const store = createStore(reducer);
 
 class App extends React.Component {
     onClick() {
-        store.dispatch(actions.closeRouteInfo());
+        store.dispatch(actions.openRouteInfo(null));
     }
 
     render () {

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d8d1f90719aa0679757a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "69287015ccdbc129a87c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -608,9 +608,9 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 188);
 	
-	var _main = __webpack_require__(/*! ./reducers/main */ 206);
+	var _reducers = __webpack_require__(/*! ./reducers */ 209);
 	
-	var _main2 = _interopRequireDefault(_main);
+	var _reducers2 = _interopRequireDefault(_reducers);
 	
 	var _actions = __webpack_require__(/*! ./actions */ 208);
 	
@@ -624,11 +624,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var finalCreateStore = (0, _redux.compose)(window.devToolsExtension ? window.devToolsExtension() : function (f) {
-	    return f;
-	})(_redux.createStore);
-	
-	var store = finalCreateStore(_main2.default);
+	var store = (0, _redux.createStore)(_reducers2.default);
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -642,7 +638,7 @@
 	    _createClass(App, [{
 	        key: 'onClick',
 	        value: function onClick() {
-	            store.dispatch(_actions2.default.closeRouteInfo());
+	            store.dispatch(_actions2.default.openRouteInfo(null));
 	        }
 	    }, {
 	        key: 'render',
@@ -22622,10 +22618,6 @@
 	    }
 	};
 	
-	var locations = [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }];
-	
-	var routesData = [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334], name: 'Brirb Trail' }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267], name: 'Cekipt Route' }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190], name: 'South Fork Trail' }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144], name: 'Tuolumne River Trail' }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320], name: 'Porcupine Creek' }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171], name: 'Parker Pass' }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136], name: 'Glen Aulin' }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89], name: 'Happy Isles' }];
-	
 	var conditional = function conditional(condition, jsx) {
 	    return condition && jsx;
 	};
@@ -22669,11 +22661,11 @@
 	                'div',
 	                { id: 'map', onClick: this.onClick.bind(this) },
 	                _react2.default.createElement('div', { id: 'mapBackground', className: currentLocation ? "unfocus" : "" }),
-	                _lodash2.default.map(locations, function (l, i) {
+	                _lodash2.default.map(this.props.locationsData, function (l, i) {
 	                    return _react2.default.createElement(_marker2.default, { key: "marker" + i, location: l });
 	                }),
-	                _react2.default.createElement(_CanvasApi2.default, { path: routesData }),
-	                _lodash2.default.map(routesData, function (r) {
+	                _react2.default.createElement(_CanvasApi2.default, { path: this.props.routesData }),
+	                _lodash2.default.map(this.props.routesData, function (r) {
 	                    return _react2.default.createElement(_Route2.default, { key: r.id, routeData: r, showInfoPanel: r.id === openedRouteInfoId });
 	                })
 	            );
@@ -22684,7 +22676,10 @@
 	}(_react2.default.Component);
 	
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return { openedRouteInfoId: state.openedRouteInfoId };
+	    return {
+	        locationsData: state.locationsData,
+	        routesData: state.routesData
+	    };
 	})(Map);
 
 /***/ },
@@ -39719,26 +39714,61 @@
 	            this.draw();
 	        }
 	    }, {
+	        key: 'setStrokeParams',
+	        value: function setStrokeParams(ctx, routeData) {
+	            var isSelected = routeData.selected;
+	            ctx.setLineDash([8, 8]);
+	            ctx.lineWidth = isSelected ? 3 : 2;
+	            ctx.strokeStyle = isSelected ? '#84325b' : '#003366';
+	        }
+	    }, {
+	        key: 'drawSingleRoute',
+	        value: function drawSingleRoute(ctx, rd) {
+	            if (rd.selected) {
+	                ctx.setLineDash([10, 6]);
+	                ctx.lineDashOffset = 1;
+	                ctx.lineWidth = 5;
+	                ctx.strokeStyle = '#a36684';
+	                ctx.beginPath();
+	                ctx.moveTo.apply(ctx, _toConsumableArray(rd.begin));
+	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(rd.control.concat(rd.end)));
+	                ctx.stroke();
+	                ctx.setLineDash([8, 8]);
+	                ctx.lineDashOffset = 0;
+	                ctx.lineWidth = 3;
+	                ctx.strokeStyle = '#84325b';
+	                ctx.beginPath();
+	                ctx.moveTo.apply(ctx, _toConsumableArray(rd.begin));
+	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(rd.control.concat(rd.end)));
+	                ctx.stroke();
+	            } else {
+	                ctx.setLineDash([8, 8]);
+	                ctx.lineWidth = 2;
+	                ctx.strokeStyle = '#003366';
+	                ctx.beginPath();
+	                ctx.moveTo.apply(ctx, _toConsumableArray(rd.begin));
+	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(rd.control.concat(rd.end)));
+	                ctx.stroke();
+	            }
+	        }
+	    }, {
 	        key: 'draw',
 	        value: function draw() {
+	            var _this2 = this;
+	
 	            var path = this.props.path;
 	            var canvas = this.refs.canvas;
 	            var ctx = canvas.getContext('2d');
 	
 	            ctx.clearRect(0, 0, canvas.width, canvas.height);
-	            ctx.setLineDash([8, 8]);
-	            ctx.beginPath();
-	
-	            _lodash2.default.forEach(path, function (p) {
-	                ctx.moveTo.apply(ctx, _toConsumableArray(p.begin));
-	                ctx.bezierCurveTo.apply(ctx, _toConsumableArray(p.control.concat(p.end)));
+	            _lodash2.default.forEach(path, function (rd) {
+	                // this.setStrokeParams(ctx, rd);
+	                // ctx.beginPath();
+	                // ctx.moveTo(...rd.begin);
+	                // ctx.bezierCurveTo(...rd.control.concat(rd.end));
+	                // ctx.stroke();
+	                _this2.drawSingleRoute(ctx, rd);
 	            });
-	
-	            ctx.lineWidth = 2;
-	
-	            // set line color
-	            ctx.strokeStyle = '#003366'; //'#ff0000';
-	            ctx.stroke();
 	        }
 	    }, {
 	        key: 'render',
@@ -39795,7 +39825,8 @@
 	
 	var MIN_EDGE = 48;
 	var MARGIN = 12;
-	var INFO_PANEL_DISTANCE = 60;
+	var INFO_PANEL_DISTANCE = 80;
+	var INFO_PANEL_EST_CENTER = 55;
 	var MAP_CENTER = [160, 240];
 	
 	var sign = function sign(x) {
@@ -39814,7 +39845,7 @@
 	    _createClass(Route, [{
 	        key: 'onClick',
 	        value: function onClick(event) {
-	            if (this.props.showInfoPanel) {
+	            if (this.props.routeData.selected) {
 	                return;
 	            }
 	
@@ -39848,14 +39879,14 @@
 	            });
 	
 	            var infoPanelBox = {
-	                left: center.left + sign(MAP_CENTER[0] - center.left) * INFO_PANEL_DISTANCE,
-	                top: center.top + sign(MAP_CENTER[1] - center.top) * INFO_PANEL_DISTANCE
+	                left: center.left + sign(MAP_CENTER[0] - center.left) * INFO_PANEL_DISTANCE - INFO_PANEL_EST_CENTER,
+	                top: center.top + sign(MAP_CENTER[1] - center.top) * INFO_PANEL_DISTANCE - INFO_PANEL_EST_CENTER
 	            };
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement('div', { className: 'route', style: responsiveBoxStyle, onClick: this.onClick.bind(this) }),
-	                _react2.default.createElement(_routeInfoPanel2.default, { show: this.props.showInfoPanel, infoPanelBox: infoPanelBox, routeData: routeData })
+	                _react2.default.createElement(_routeInfoPanel2.default, { show: routeData.selected, infoPanelBox: infoPanelBox, routeData: routeData })
 	            );
 	        }
 	    }]);
@@ -41717,53 +41748,7 @@
 	exports.default = PrimaryPanel;
 
 /***/ },
-/* 206 */
-/*!*****************************************!*\
-  !*** ./src/client/app/reducers/main.js ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = main;
-	
-	var _actionTypes = __webpack_require__(/*! ../actionTypes.js */ 207);
-	
-	var _actionTypes2 = _interopRequireDefault(_actionTypes);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var initialState = {
-	    openedRouteInfoId: null,
-	    locations: [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }],
-	    routesData: [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334], name: 'Brirb Trail' }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267], name: 'Cekipt Route' }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190], name: 'South Fork Trail' }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144], name: 'Tuolumne River Trail' }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320], name: 'Porcupine Creek' }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171], name: 'Parker Pass' }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136], name: 'Glen Aulin' }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89], name: 'Happy Isles' }]
-	};
-	
-	function main() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
-	    var action = arguments[1];
-	
-	    switch (action.type) {
-	
-	        case _actionTypes2.default.OPEN_ROUTE_INFO:
-	            return {
-	                openedRouteInfoId: action.id
-	            };
-	
-	        case _actionTypes2.default.CLOSE_ROUTE_INFO:
-	            return {
-	                openedRouteInfoId: null
-	            };
-	
-	        default:
-	            return state;
-	    }
-	}
-
-/***/ },
+/* 206 */,
 /* 207 */
 /*!***************************************!*\
   !*** ./src/client/app/actionTypes.js ***!
@@ -41813,6 +41798,119 @@
 	        };
 	    }
 	};
+
+/***/ },
+/* 209 */
+/*!******************************************!*\
+  !*** ./src/client/app/reducers/index.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _redux = __webpack_require__(/*! redux */ 188);
+	
+	var _locationsData = __webpack_require__(/*! ./locationsData */ 210);
+	
+	var _locationsData2 = _interopRequireDefault(_locationsData);
+	
+	var _routesData = __webpack_require__(/*! ./routesData */ 211);
+	
+	var _routesData2 = _interopRequireDefault(_routesData);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var reducer = (0, _redux.combineReducers)({
+	    locationsData: _locationsData2.default,
+	    routesData: _routesData2.default
+	});
+	exports.default = reducer;
+
+/***/ },
+/* 210 */
+/*!**************************************************!*\
+  !*** ./src/client/app/reducers/locationsData.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = locationsData;
+	
+	var _actionTypes = __webpack_require__(/*! ../actionTypes.js */ 207);
+	
+	var _actionTypes2 = _interopRequireDefault(_actionTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = [{ id: 'STRT', coordinates: { x: 141, y: 442 }, siblings: ['L001', 'R001'] }, { id: 'L001', coordinates: { x: 96, y: 312 }, siblings: ['STRT', 'L002'] }, { id: 'R001', coordinates: { x: 242, y: 326 }, siblings: ['STRT', 'R002'] }, { id: 'R002', coordinates: { x: 179, y: 259 }, siblings: ['R001', 'R003'] }, { id: 'L002', coordinates: { x: 38, y: 163 }, siblings: ['L001', 'BRDG'] }, { id: 'R003', coordinates: { x: 230, y: 182 }, siblings: ['R002', 'BRDG'] }, { id: 'BRDG', coordinates: { x: 134, y: 144 }, siblings: ['L002', 'R003', 'FINL'] }, { id: 'FINL', coordinates: { x: 160, y: 77 }, siblings: ['BRDG'] }];
+	
+	function locationsData() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	        case _actionTypes2.default.OPEN_ROUTE_INFO:
+	        case _actionTypes2.default.CLOSE_ROUTE_INFO:
+	        default:
+	            return state;
+	    }
+	}
+
+/***/ },
+/* 211 */
+/*!***********************************************!*\
+  !*** ./src/client/app/reducers/routesData.js ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = routesData;
+	
+	var _lodash = __webpack_require__(/*! lodash */ 173);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _actionTypes = __webpack_require__(/*! ../actionTypes.js */ 207);
+	
+	var _actionTypes2 = _interopRequireDefault(_actionTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = [{ id: "STRTR001", begin: [149, 434], control: [165, 365, 250, 350], end: [236, 334], name: 'Brirb Trail' }, { id: "R001R002", begin: [234, 318], control: [220, 290, 230, 350], end: [187, 267], name: 'Cekipt Route' }, { id: "R002R003", begin: [181, 251], control: [190, 220, 210, 200], end: [222, 190], name: 'South Fork Trail' }, { id: "R003BRDG", begin: [218, 182], control: [190, 160, 170, 150], end: [146, 144], name: 'Tuolumne River Trail' }, { id: "STRTL001", begin: [133, 434], control: [80, 385, 150, 360], end: [104, 320], name: 'Porcupine Creek' }, { id: "L001L002", begin: [88, 304], control: [60, 290, 60, 220], end: [46, 171], name: 'Parker Pass' }, { id: "L002BRDG", begin: [46, 155], control: [70, 150, 100, 118], end: [126, 136], name: 'Glen Aulin' }, { id: "BRDGFINL", begin: [142, 136], control: [145, 120, 152, 100], end: [160, 89], name: 'Happy Isles' }];
+	
+	function routesData() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	
+	        case _actionTypes2.default.OPEN_ROUTE_INFO:
+	            return _lodash2.default.map(initialState, function (rd) {
+	                return _lodash2.default.assign({}, rd, { selected: rd.id === action.id });
+	            });
+	
+	        case _actionTypes2.default.CLOSE_ROUTE_INFO:
+	            // obsolete - use open with null id
+	            return _lodash2.default.map(initialState, function (rd) {
+	                return _lodash2.default.assign({}, rd, { selected: false });
+	            });
+	
+	        default:
+	            return state;
+	    }
+	}
 
 /***/ }
 /******/ ]);

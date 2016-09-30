@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 var MIN_EDGE = 48;
 var MARGIN = 12;
-var INFO_PANEL_DISTANCE = 60;
+var INFO_PANEL_DISTANCE = 80;
+var INFO_PANEL_EST_CENTER = 55;
 var MAP_CENTER = [160, 240];
 
 var sign = x => x >= 0 ? 1 : -1;
@@ -18,7 +19,7 @@ class Route extends React.Component {
     }
 
     onClick(event){
-        if (this.props.showInfoPanel) {
+        if (this.props.routeData.selected) {
             return;
         }
 
@@ -51,13 +52,13 @@ class Route extends React.Component {
         });
 
         var infoPanelBox = {
-            left: center.left + sign(MAP_CENTER[0] - center.left) * INFO_PANEL_DISTANCE,
-            top: center.top + sign(MAP_CENTER[1] - center.top) * INFO_PANEL_DISTANCE,
+            left: center.left + sign(MAP_CENTER[0] - center.left) * INFO_PANEL_DISTANCE - INFO_PANEL_EST_CENTER,
+            top: center.top + sign(MAP_CENTER[1] - center.top) * INFO_PANEL_DISTANCE - INFO_PANEL_EST_CENTER,
         };
         return (
             <div>
                 <div className="route" style={responsiveBoxStyle} onClick={this.onClick.bind(this)}></div>
-                <RouteInfoPanel show={this.props.showInfoPanel} infoPanelBox={infoPanelBox} routeData={routeData}></RouteInfoPanel>
+                <RouteInfoPanel show={routeData.selected} infoPanelBox={infoPanelBox} routeData={routeData}></RouteInfoPanel>
             </div>
         );
     }
