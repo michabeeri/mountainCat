@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e5412e6fd6abf947e5e8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ba989e7d615a99a92cde"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -629,7 +629,6 @@
 	})(_redux.createStore);
 	
 	var store = finalCreateStore(_main2.default);
-	store.dispatch(_actions2.default.openRouteInfo("R003BRDG"));
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -641,11 +640,16 @@
 	    }
 	
 	    _createClass(App, [{
+	        key: 'onClick',
+	        value: function onClick() {
+	            store.dispatch(_actions2.default.closeRouteInfo());
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { id: 'appContainer' },
+	                { id: 'appContainer', onClick: this.onClick.bind(this) },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'bannerContainer animate' },
@@ -39782,6 +39786,12 @@
 	
 	var _routeInfoPanel2 = _interopRequireDefault(_routeInfoPanel);
 	
+	var _actions = __webpack_require__(/*! ./actions */ 208);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 181);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39805,18 +39815,18 @@
 	    function Route(props) {
 	        _classCallCheck(this, Route);
 	
-	        var _this = _possibleConstructorReturn(this, (Route.__proto__ || Object.getPrototypeOf(Route)).call(this, props));
-	
-	        _this.state = { showInfoPanel: false };
-	        return _this;
+	        return _possibleConstructorReturn(this, (Route.__proto__ || Object.getPrototypeOf(Route)).call(this, props));
 	    }
 	
 	    _createClass(Route, [{
 	        key: 'onClick',
-	        value: function onClick() {
-	            this.setState({
-	                showInfoPanel: !this.state.showInfoPanel
-	            });
+	        value: function onClick(event) {
+	            if (this.props.showInfoPanel) {
+	                return;
+	            }
+	
+	            this.props.dispatch(_actions2.default.openRouteInfo(this.props.routeData.id));
+	            event.stopPropagation();
 	        }
 	    }, {
 	        key: 'render',
@@ -39860,7 +39870,9 @@
 	    return Route;
 	}(_react2.default.Component);
 	
-	exports.default = Route;
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {};
+	})(Route);
 
 /***/ },
 /* 180 */

@@ -12,12 +12,15 @@ const finalCreateStore = compose(
 )(createStore);
 
 const store = finalCreateStore(main);
-store.dispatch(actions.openRouteInfo("R003BRDG"));
 
 class App extends React.Component {
+    onClick() {
+        store.dispatch(actions.closeRouteInfo());
+    }
+
     render () {
         return (
-            <div id="appContainer">
+            <div id="appContainer" onClick={this.onClick.bind(this)}>
                 <div className="bannerContainer animate">
                     <h3 className="mapName">laughing steppes</h3>
                 </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import RouteInfoPanel from './routeInfoPanel.jsx'
+import actions from './actions';
+import { connect } from 'react-redux';
 
 var MIN_EDGE = 48;
 var MARGIN = 12;
@@ -13,13 +15,15 @@ class Route extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {showInfoPanel: false};
     }
 
-    onClick(){
-        this.setState({
-            showInfoPanel: !this.state.showInfoPanel
-        })
+    onClick(event){
+        if (this.props.showInfoPanel) {
+            return;
+        }
+        
+        this.props.dispatch(actions.openRouteInfo(this.props.routeData.id));
+        event.stopPropagation();
     }
 
     render() {
@@ -59,4 +63,4 @@ class Route extends React.Component {
     }
 }
 
-export default Route;
+export default connect(state => ({}))(Route);
